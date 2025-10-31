@@ -32,4 +32,20 @@ void main() {
       expect(actualResult, expectedResult);
     },
   );
+  test(
+    "the divide method should throw an exception when the number2 by zero",
+    () {
+      //arrange
+      final calculator = Calculator();
+      const number1 = 10;
+      const number2 = 0;
+      final expectedResult = throwsA(isA<Exception>());
+
+      //act
+      int actualResult() => calculator.divide(number1, number2);
+
+      //assert
+      expect(actualResult, expectedResult);
+    },
+  );
 }
