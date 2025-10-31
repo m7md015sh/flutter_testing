@@ -15,4 +15,21 @@ void main() {
     //assert
     expect(actualResult, expectedResult);
   });
+
+  test(
+    "the divide method should be return 5 when the number1=10 & number2=2",
+    () {
+      //arrange
+      final calculator = Calculator();
+      const number1 = 10;
+      const number2 = 2;
+      const expectedResult = 5;
+
+      //act
+      final actualResult = calculator.divide(number1, number2);
+
+      //assert
+      expect(actualResult, expectedResult);
+    },
+  );
 }
