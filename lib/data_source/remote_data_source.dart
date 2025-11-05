@@ -14,6 +14,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final response = await networkService.getPosts(
       'https://jsonplaceholder.typicode.com/posts',
     );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load posts');
+    }
     final result = response.data as List<dynamic>;
     final posts = result.map((post) => PostModel.fromJson(post)).toList();
     return posts;

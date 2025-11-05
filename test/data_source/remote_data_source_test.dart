@@ -39,6 +39,7 @@ void main() {
           requestOptions: RequestOptions(
             path: 'https://jsonplaceholder.typicode.com/posts',
           ),
+          statusCode: 200,
           data: postsMap,
         ),
       ),
@@ -48,4 +49,32 @@ void main() {
     //assert
     expect(result, posts);
   });
+  test(
+    'getPosts should threw an exception if status code is not 200',
+    () async {
+      //arrange
+      final expectedResult = throwsA(isA<Exception>());
+      //act
+      when(
+        mockNetworkService.getPosts(
+          'https://jsonplaceholder.typicode.com/posts',
+        ),
+      ).thenAnswer(
+        (_) => Future.value(
+          Response(
+            requestOptions: RequestOptions(
+              path: 'https://jsonplaceholder.typicode.com/posts',
+            ),
+            statusCode: 404,
+          ),
+        ),
+      );
+
+      //act
+      final result = () async => remoteDataSource.getPosts();
+
+      //assert
+      expect(result, expectedResult);
+    },
+  );
 }
