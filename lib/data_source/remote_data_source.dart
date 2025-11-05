@@ -11,9 +11,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<PostModel>> getPosts() async {
-    final response = await networkService.getPosts(
-      'https://jsonplaceholder.typicode.com/posts',
-    );
+    final baseUrl = 'https://jsonplaceholder.typicode.com/posts';
+    final response = await networkService.getPosts(baseUrl);
     if (response.statusCode != 200) {
       throw Exception('Failed to load posts');
     }
