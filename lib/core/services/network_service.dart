@@ -5,7 +5,7 @@ abstract class NetworkService {
 }
 
 class NetworkServiceImpl implements NetworkService {
-  final dio = Dio();
+  final dio = Dio(BaseOptions(headers: {'Accept': 'application/json'}));
 
   @override
   Future<Response> getPosts(String url) async {
