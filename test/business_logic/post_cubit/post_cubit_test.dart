@@ -36,4 +36,24 @@ void main() {
     //act
     await postCubit.getPosts();
   });
+  test(
+    'getPosts should be emit loading then error with error message',
+    () async {
+      //arrange
+
+      when(
+        mockPostRepository.getPosts(),
+      ).thenAnswer((_) async => throw Exception('Connection error'));
+
+      //assert
+      final expectedState = [
+        PostLoadingState(),
+        PostErrorState(message: 'Exception: Connection error'),
+      ];
+      expectLater(postCubit.stream, emitsInAnyOrder(expectedState));
+
+      //act
+      await postCubit.getPosts();
+    },
+  );
 }
